@@ -7,6 +7,7 @@ import {
   Logo,
   ProfileIcon
 } from '@zlden/react-developer-burger-ui-components';
+import { Outlet } from 'react-router-dom';
 
 export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => (
   <header className={styles.header}>
@@ -31,5 +32,6 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => (
         </p>
       </div>
     </nav>
+    <Outlet />
   </header>
 );
