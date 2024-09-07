@@ -17,12 +17,14 @@ import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { useDispatch } from '../../services/store';
 import { useEffect } from 'react';
 import { fetchIngredients } from '../../slices/ingredientsSlice';
+import { fetchFeeds } from '../../slices/feedsSlice';
 
 const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchIngredients());
+    dispatch(fetchFeeds());
   }, []);
 
   return (
