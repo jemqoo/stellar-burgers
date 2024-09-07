@@ -10,10 +10,8 @@ export const BurgerConstructor: FC = () => {
 
   /** TODO: взять переменные constructorItems, orderRequest и orderModalData из стора */
   const constructorItems = {
-    bun: burgerConstructor.ingredients.find((item) => item.type === 'bun'),
-    ingredients: burgerConstructor.ingredients.filter(
-      (item) => item.type !== 'bun'
-    )
+    bun: burgerConstructor.bun,
+    ingredients: burgerConstructor.ingredients
   };
 
   const orderRequest = false;
