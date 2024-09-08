@@ -1,5 +1,5 @@
 import { getFeedsApi } from '@api';
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TIngredient, TOrder } from '@utils-types';
 
 // type TFeedsState = {
@@ -25,7 +25,11 @@ export const fetchFeeds = createAsyncThunk(
 const feedsSlice = createSlice({
   name: 'feed',
   initialState,
-  reducers: {},
+  reducers: {
+    addNewOrder: (state, action: PayloadAction<TOrder>) => {
+      state.feeds.push(action.payload);
+    }
+  },
   selectors: {
     getFeeds: (state) => state.feeds,
     getFeedsStatus: (state) => state.isLoading,
@@ -53,3 +57,5 @@ export const { getFeeds, getFeedsStatus, getTotal, getTotalToday } =
   feedsSlice.selectors;
 
 export const feedReducer = feedsSlice.reducer;
+
+export const { addNewOrder } = feedsSlice.actions;

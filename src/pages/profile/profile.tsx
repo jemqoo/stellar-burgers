@@ -2,6 +2,7 @@ import { ProfileUI } from '@ui-pages';
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from '../../services/store';
 import { getUserThunk } from '../../slices/userSlice';
+import { getOrders } from '../../slices/userOrdersSlice';
 
 export const Profile: FC = () => {
   const { user } = useSelector((state) => ({
@@ -11,6 +12,10 @@ export const Profile: FC = () => {
   }));
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getOrders());
+  }, []);
 
   // Инициализация formValue с начальными значениями
   const [formValue, setFormValue] = useState({

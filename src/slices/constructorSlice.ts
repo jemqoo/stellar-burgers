@@ -71,6 +71,10 @@ export const constructorSlice = createSlice({
           }
           return;
       }
+    },
+    clearConstructor: (state) => {
+      state.bun = null;
+      state.ingredients = [];
     }
   },
   selectors: {
@@ -80,4 +84,5 @@ export const constructorSlice = createSlice({
 
 export const constructorReducer = constructorSlice.reducer;
 
-export const { addItem, removeItem, changeItem } = constructorSlice.actions;
+export const { addItem, removeItem, changeItem, clearConstructor } =
+  constructorSlice.actions;
