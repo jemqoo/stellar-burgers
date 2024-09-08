@@ -1,43 +1,57 @@
 import { ProfileUI } from '@ui-pages';
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from '../../services/store';
+import { getUserThunk } from '../../slices/userSlice';
 
 export const Profile: FC = () => {
-  /** TODO: взять переменную из стора */
-  const user = {
+  const { user } = useSelector((state) => ({
+    ...state.user,
     name: '',
     email: ''
-  };
+  }));
 
+  const dispatch = useDispatch();
+
+  // Инициализация formValue с начальными значениями
   const [formValue, setFormValue] = useState({
-    name: user.name,
-    email: user.email,
+    name: '', // Или используйте default значение (например, 'Unknown')
+    email: '',
     password: ''
   });
 
+  // Обновление formValue при изменении user
   useEffect(() => {
-    setFormValue((prevState) => ({
-      ...prevState,
-      name: user?.name || '',
-      email: user?.email || ''
-    }));
+    if (user) {
+      setFormValue({
+        name: user.name,
+        email: user.email,
+        password: ''
+      });
+    }
   }, [user]);
 
+  // Правильное сравнение для isFormChanged
   const isFormChanged =
-    formValue.name !== user?.name ||
-    formValue.email !== user?.email ||
-    !!formValue.password;
+    user &&
+    (formValue.name !== user.name ||
+      formValue.email !== user.email ||
+      !!formValue.password);
 
+  // Остальной код без изменений
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
+    dispatch(getUserThunk(formValue));
   };
 
   const handleCancel = (e: SyntheticEvent) => {
     e.preventDefault();
-    setFormValue({
-      name: user.name,
-      email: user.email,
-      password: ''
-    });
+    if (user) {
+      setFormValue({
+        name: user.name,
+        email: user.email,
+        password: ''
+      });
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,6 +70,4 @@ export const Profile: FC = () => {
       handleInputChange={handleInputChange}
     />
   );
-
-  return null;
 };

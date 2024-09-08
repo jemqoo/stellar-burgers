@@ -49,22 +49,26 @@ export const constructorSlice = createSlice({
     changeItem: (state, action: PayloadAction<TMoveItem>) => {
       switch (action.payload.move) {
         case 'down':
-          [
-            state.ingredients[action.payload.index],
-            state.ingredients[action.payload.index + 1]
-          ] = [
-            state.ingredients[action.payload.index + 1],
-            state.ingredients[action.payload.index]
-          ];
+          if (action.payload.index < state.ingredients.length - 1) {
+            [
+              state.ingredients[action.payload.index],
+              state.ingredients[action.payload.index + 1]
+            ] = [
+              state.ingredients[action.payload.index + 1],
+              state.ingredients[action.payload.index]
+            ];
+          }
           return;
         case 'up':
-          [
-            state.ingredients[action.payload.index],
-            state.ingredients[action.payload.index - 1]
-          ] = [
-            state.ingredients[action.payload.index - 1],
-            state.ingredients[action.payload.index]
-          ];
+          if (action.payload.index > 0) {
+            [
+              state.ingredients[action.payload.index],
+              state.ingredients[action.payload.index - 1]
+            ] = [
+              state.ingredients[action.payload.index - 1],
+              state.ingredients[action.payload.index]
+            ];
+          }
           return;
       }
     }
