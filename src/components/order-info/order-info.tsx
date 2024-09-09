@@ -1,17 +1,32 @@
-import { FC, useMemo } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
 import { useParams } from 'react-router-dom';
-import { useSelector } from '../../services/store';
+import { useDispatch, useSelector } from '../../services/store';
+import { clearOrderModalData, getOrder } from '../../slices/newOrderSlice';
 
 export const OrderInfo: FC = () => {
+  const dispatch = useDispatch();
+
   /** TODO: взять переменные orderData и ingredients из стора */
-  const number = useParams().number?.toString();
-  const orders = useSelector((state) => state.feed.feeds);
-  const orderData = orders.find((item) => item.number.toString() === number);
+  // const number = useParams().number?.toString();
+  // const orders = useSelector((state) => state.feed.feeds);
+  // const orderData = orders.find((item) => item.number.toString() === number);
+
+  const orderData = useSelector((state) => state.order.orderModalData);
+  const number = Number(useParams().number);
 
   const { ingredients } = useSelector((state) => state.ingredients);
+
+  useEffect(() => {
+    dispatch(getOrder(number));
+
+    return () => {
+      dispatch(clearOrderModalData());
+    };
+  }, [dispatch]);
+
   /* Готовим данные для отображения */
   const orderInfo = useMemo(() => {
     if (!orderData || !ingredients.length) return null;

@@ -7,27 +7,17 @@ export const getOrders = createAsyncThunk(
   async () => await getOrdersApi()
 );
 
-type TUserOrdersState = {
-  orders: TOrder[];
-  loading: boolean;
-  error?: string | null;
-};
-
-const initialState: TUserOrdersState = {
-  orders: [],
+const initialState = {
+  orders: [] as TOrder[],
   loading: false,
-  error: null
+  error: null as string | null
 };
 
-export const userOrdersSlice = createSlice({
+const userOrdersSlice = createSlice({
   name: 'order',
   initialState,
   reducers: {},
-  selectors: {
-    getUserOrdersSelector: (state) => state.orders
-  },
-
-  extraReducers: (builder) =>
+  extraReducers: (builder) => {
     builder
       .addCase(getOrders.pending, (state) => {
         state.loading = true;
@@ -35,13 +25,15 @@ export const userOrdersSlice = createSlice({
       })
       .addCase(getOrders.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.error.message || null; // Проверка на undefined
       })
       .addCase(getOrders.fulfilled, (state, action) => {
         state.loading = false;
         state.orders = action.payload;
-      })
+      });
+  }
 });
 
 export const userOrdersReducer = userOrdersSlice.reducer;
-export const { getUserOrdersSelector } = userOrdersSlice.selectors;
+export const getUserOrdersSelector = (state: { orders: TOrder[] }) =>
+  state.orders;

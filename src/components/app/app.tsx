@@ -34,7 +34,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(fetchIngredients());
-    dispatch(fetchFeeds());
+    // dispatch(fetchFeeds());
   }, []);
 
   return (

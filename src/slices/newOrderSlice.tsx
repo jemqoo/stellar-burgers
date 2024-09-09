@@ -1,4 +1,4 @@
-import { orderBurgerApi } from '@api';
+import { getOrderByNumberApi, orderBurgerApi } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TOrder } from '@utils-types';
 
@@ -19,7 +19,12 @@ export const addOrder = createAsyncThunk(
   async (data: string[]) => await orderBurgerApi(data)
 );
 
-export const orderSlice = createSlice({
+export const getOrder = createAsyncThunk(
+  'userOrder/getByNumber',
+  async (number: number) => await getOrderByNumberApi(number)
+);
+
+const orderSlice = createSlice({
   name: 'order',
   initialState,
   reducers: {
@@ -27,7 +32,7 @@ export const orderSlice = createSlice({
       state.orderModalData = null;
     }
   },
-  extraReducers: (builder) =>
+  extraReducers: (builder) => {
     builder
       .addCase(addOrder.pending, (state) => {
         state.error = null;
@@ -40,6 +45,16 @@ export const orderSlice = createSlice({
         state.orderModalData = action.payload.order;
         state.orderRequest = false;
       })
+      .addCase(getOrder.pending, (state) => {
+        state.error = null;
+      })
+      .addCase(getOrder.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+      .addCase(getOrder.fulfilled, (state, action) => {
+        state.orderModalData = action.payload.orders[0];
+      });
+  }
 });
 
 export const { clearOrderModalData } = orderSlice.actions;
