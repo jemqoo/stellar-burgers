@@ -2,10 +2,7 @@ import { getOrdersApi } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TOrder } from '@utils-types';
 
-export const getOrders = createAsyncThunk(
-  'userOrder/getAll',
-  async () => await getOrdersApi()
-);
+export const getOrders = createAsyncThunk('orders/ofUser', getOrdersApi);
 
 const initialState = {
   orders: [] as TOrder[],
@@ -17,6 +14,9 @@ const userOrdersSlice = createSlice({
   name: 'order',
   initialState,
   reducers: {},
+  selectors: {
+    listOfOrders: (state) => state.orders
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getOrders.pending, (state) => {
