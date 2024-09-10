@@ -4,7 +4,10 @@ import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from '../../services/store';
-import { clearOrderModalData, getOrder } from '../../slices/newOrderSlice';
+import {
+  clearOrderModalData,
+  getOrderByNumber
+} from '../../slices/newOrderSlice';
 
 export const OrderInfo: FC = () => {
   const dispatch = useDispatch();
@@ -20,7 +23,7 @@ export const OrderInfo: FC = () => {
   const { ingredients } = useSelector((state) => state.ingredients);
 
   useEffect(() => {
-    dispatch(getOrder(number));
+    dispatch(getOrderByNumber(number));
 
     return () => {
       dispatch(clearOrderModalData());

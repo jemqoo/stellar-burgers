@@ -13,9 +13,9 @@ export const Profile: FC = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getOrders());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getOrders());
+  // }, []);
 
   // Инициализация formValue с начальными значениями
   const [formValue, setFormValue] = useState({
