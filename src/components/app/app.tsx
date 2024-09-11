@@ -13,17 +13,10 @@ import '../../index.css';
 import styles from './app.module.css';
 
 import { AppHeader, Modal, OrderInfo, IngredientDetails } from '@components';
-import {
-  BrowserRouter,
-  Route,
-  Routes,
-  useLocation,
-  useNavigate
-} from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from '../../services/store';
 import { useEffect } from 'react';
 import { fetchIngredients } from '../../slices/ingredientsSlice';
-import { fetchFeeds } from '../../slices/feedsSlice';
 import { ProtectedRoute } from '../protected-routes/protected-route';
 import { checkUserAuth } from '../../slices/userSlice';
 
@@ -36,7 +29,6 @@ const App = () => {
   useEffect(() => {
     dispatch(checkUserAuth());
     dispatch(fetchIngredients());
-    // dispatch(fetchFeeds());
   }, []);
 
   return (

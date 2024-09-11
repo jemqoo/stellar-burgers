@@ -1,4 +1,3 @@
-import { getIngredientsApi } from '@api';
 import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
 import { TConstructorIngredient, TIngredient } from '@utils-types';
 
@@ -16,14 +15,6 @@ export type TMoveItem = {
   move: 'up' | 'down';
   index: number;
 };
-
-// export const fetchIngredients = createAsyncThunk(
-//   'ingredients/fetchIngredients',
-//   async () => {
-//     const ingredients = await getIngredientsApi();
-//     return ingredients;
-//   }
-// );
 
 export const constructorSlice = createSlice({
   name: 'constructor',

@@ -7,13 +7,8 @@ import {
   fetchIngredients,
   getIngredientsSelector
 } from './../../slices/ingredientsSlice';
-import { TIngredient } from '@utils-types';
 
 export const IngredientDetails: FC = () => {
-  /** TODO: взять переменную из стора */
-
-  // const ingredientData = null;
-
   const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch();
 
@@ -22,7 +17,6 @@ export const IngredientDetails: FC = () => {
   }, [dispatch]);
 
   const ingredients = useSelector(getIngredientsSelector);
-  // const loadingStatus = useSelector(getIngredientsLoadingStatus);
 
   const ingredientData = ingredients.find(
     (ingredient) => ingredient._id === id

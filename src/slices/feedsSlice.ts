@@ -2,11 +2,6 @@ import { getFeedsApi } from '@api';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TIngredient, TOrder } from '@utils-types';
 
-// type TFeedsState = {
-//   ingredients: Array<TIngredient>;
-//   isLoading: boolean;
-// };
-
 const initialState = {
   feeds: [] as TOrder[],
   total: 0,

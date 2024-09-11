@@ -19,7 +19,7 @@ const rootReducer = combineReducers({
   user: userReducer,
   order: orderReducer,
   userOrders: userOrdersReducer
-}); // Заменить на импорт настоящего редьюсера
+});
 
 const store = configureStore({
   reducer: rootReducer,

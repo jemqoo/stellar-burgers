@@ -1,4 +1,4 @@
-import { getFeedsApi, getOrderByNumberApi, orderBurgerApi } from '@api';
+import { getOrderByNumberApi, orderBurgerApi } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TOrder } from '@utils-types';
 
@@ -27,11 +27,6 @@ export const getOrderByNumber = createAsyncThunk(
     return await getOrderByNumberApi(number);
   }
 );
-
-// все заказы
-export const getFeeds = createAsyncThunk('order/getFeeds', async function () {
-  return await getFeedsApi();
-});
 
 const orderSlice = createSlice({
   name: 'order',
@@ -63,9 +58,6 @@ const orderSlice = createSlice({
       .addCase(getOrderByNumber.fulfilled, (state, action) => {
         state.orderModalData = action.payload.orders[0];
       });
-    // .addCase(getFeeds.fulfilled, (state, action) => {
-    //   state.orderModalData = action.payload;
-    // });
   }
 });
 

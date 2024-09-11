@@ -30,7 +30,7 @@ const userOrdersSlice = createSlice({
       })
       .addCase(getOrders.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || null; // Проверка на undefined
+        state.error = action.error.message || null;
       })
       .addCase(getOrders.fulfilled, (state, action) => {
         state.loading = false;

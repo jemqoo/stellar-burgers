@@ -11,12 +11,6 @@ import {
 
 export const OrderInfo: FC = () => {
   const dispatch = useDispatch();
-
-  /** TODO: взять переменные orderData и ingredients из стора */
-  // const number = useParams().number?.toString();
-  // const orders = useSelector((state) => state.feed.feeds);
-  // const orderData = orders.find((item) => item.number.toString() === number);
-
   const orderData = useSelector((state) => state.order.orderModalData);
   const number = Number(useParams().number);
 
@@ -30,7 +24,6 @@ export const OrderInfo: FC = () => {
     };
   }, [dispatch]);
 
-  /* Готовим данные для отображения */
   const orderInfo = useMemo(() => {
     if (!orderData || !ingredients.length) return null;
 
