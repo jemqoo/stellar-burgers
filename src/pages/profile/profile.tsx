@@ -13,18 +13,12 @@ export const Profile: FC = () => {
 
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(getOrders());
-  // }, []);
-
-  // Инициализация formValue с начальными значениями
   const [formValue, setFormValue] = useState({
-    name: '', // Или используйте default значение (например, 'Unknown')
+    name: '',
     email: '',
     password: ''
   });
 
-  // Обновление formValue при изменении user
   useEffect(() => {
     if (user) {
       setFormValue({
@@ -35,14 +29,12 @@ export const Profile: FC = () => {
     }
   }, [user]);
 
-  // Правильное сравнение для isFormChanged
   const isFormChanged =
     user &&
     (formValue.name !== user.name ||
       formValue.email !== user.email ||
       !!formValue.password);
 
-  // Остальной код без изменений
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
     dispatch(getUserThunk(formValue));
