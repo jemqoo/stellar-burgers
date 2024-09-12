@@ -17,7 +17,7 @@ export const ProtectedRoute = ({ children, type }: ProtectedRouteProps) => {
   }
 
   if (type === 'auth' && !user) {
-    return <Navigate to='/login' />;
+    return <Navigate to='/login' state={{ from: location }} />;
   }
 
   if (type === 'unauth' && user) {

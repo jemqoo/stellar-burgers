@@ -13,7 +13,7 @@ export const Login: FC = () => {
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    let userLoginData = {
+    const userLoginData = {
       email,
       password
     };

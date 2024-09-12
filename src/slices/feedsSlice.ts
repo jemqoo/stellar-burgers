@@ -9,13 +9,7 @@ const initialState = {
   isLoading: true
 };
 
-export const fetchFeeds = createAsyncThunk(
-  'feeds/fetchOrders',
-  async function () {
-    const feeds: any = getFeedsApi();
-    return feeds;
-  }
-);
+export const fetchFeeds = createAsyncThunk('feeds/fetchOrders', getFeedsApi);
 
 const feedsSlice = createSlice({
   name: 'feed',
