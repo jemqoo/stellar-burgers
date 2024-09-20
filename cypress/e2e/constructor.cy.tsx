@@ -79,7 +79,7 @@ describe('e2e test for burger constructor page: creating order', () => {
 
     cy.get(orderButton).click();
     cy.get(modal).should('be.visible');
-    cy.get(orderNumber).should('contain.text', '52971');
+    cy.get(orderNumber).should('contain.text', '777');
 
     cy.get(modalCloseButton).click();
     cy.get(modal).should('not.exist');
