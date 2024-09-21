@@ -1,12 +1,12 @@
 import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
 import { TConstructorIngredient, TIngredient } from '@utils-types';
 
-type TIngredientsState = {
+export type TIngredientsState = {
   bun: TIngredient | null;
   ingredients: TConstructorIngredient[];
 };
 
-const initialState: TIngredientsState = {
+export const initialState: TIngredientsState = {
   ingredients: [],
   bun: null
 };
@@ -21,7 +21,10 @@ export const constructorSlice = createSlice({
   initialState,
   reducers: {
     addItem: {
-      reducer: (state, action: PayloadAction<TConstructorIngredient>) => {
+      reducer: (
+        state: TIngredientsState,
+        action: PayloadAction<TConstructorIngredient>
+      ) => {
         if (action.payload.type === 'bun') {
           state.bun = action.payload;
         } else {
