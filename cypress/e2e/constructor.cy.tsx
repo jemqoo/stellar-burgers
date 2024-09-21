@@ -11,17 +11,12 @@ const orderButton = '[data-cy="orderButton"]';
 const orderNumber = '[data-cy="orderNumber"]';
 
 beforeEach(() => {
-  cy.intercept('GET', `${url}/ingredients`, {
+  cy.intercept('GET', `api/ingredients`, {
     fixture: 'ingredients.json'
   }).as('mockIngredients');
   cy.setCookie('accessToken', 'ACCESS_TOKEN');
   localStorage.setItem('refreshToken', 'REFRESH_TOKEN');
-  cy.intercept('GET', `${url}/auth/user`, { fixture: 'user.json' }).as(
-    'mockUser'
-  );
-  cy.intercept('POST', `${url}/orders`, { fixture: 'order.json' }).as(
-    'mockOrder'
-  );
+  cy.intercept('GET', `api/auth/user`, { fixture: 'user.json' }).as('mockUser');
   cy.visit(testUrl);
 });
 
@@ -78,6 +73,10 @@ describe('e2e test for burger constructor page: creating order', () => {
     cy.get(orderButton).should('be.enabled');
 
     cy.get(orderButton).click();
+    cy.intercept('POST', `api/orders`, { fixture: 'order.json' }).as(
+      'mockOrder'
+    );
+
     cy.get(modal).should('be.visible');
     cy.get(orderNumber).should('contain.text', '777');
 
