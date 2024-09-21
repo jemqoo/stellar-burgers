@@ -1,8 +1,8 @@
-import { getFeedsApi } from '@api';
+import { getFeedsApi } from '../utils/burger-api';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TIngredient, TOrder } from '@utils-types';
 
-const initialState = {
+export const initialState = {
   feeds: [] as TOrder[],
   total: 0,
   totalToday: 0,

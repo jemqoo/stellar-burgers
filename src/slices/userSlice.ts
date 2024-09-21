@@ -5,7 +5,7 @@ import {
   registerUserApi,
   updateUserApi,
   logoutApi
-} from '@api';
+} from '../utils/burger-api';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TUser } from '@utils-types';
 import { deleteCookie, getCookie, setCookie } from '../utils/cookie';
@@ -71,7 +71,7 @@ type TUserState = {
   isAuthChecked: boolean;
 };
 
-const initialState: TUserState = {
+export const initialState: TUserState = {
   isAuthChecked: false,
   loading: false,
   user: null,
